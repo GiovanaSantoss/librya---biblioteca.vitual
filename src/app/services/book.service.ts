@@ -7,9 +7,9 @@ import { Book } from '../models/book.model';
 export class BookService {
   
   private books: Book[] = [
-    { id: 1, title: 'O Senhor dos Anéis', author: 'J.R.R. Tolkien', coverImage: 'https://via.placeholder.com/150/1976D2/FFFFFF?Text=SdA' },
-    { id: 2, title: 'O Guia do Mochileiro das Galáxias', author: 'Douglas Adams', coverImage: 'https://via.placeholder.com/150/8BC34A/FFFFFF?Text=Guia' },
-    { id: 3, title: 'Duna', author: 'Frank Herbert', coverImage: 'https://via.placeholder.com/150/FFC107/000000?Text=Duna' }
+    { id: 1, title: 'O Senhor dos Anéis', author: 'J.R.R. Tolkien', coverImage: 'assets/images/aneis.jpg' },
+    { id: 2, title: 'O Guia do Mochileiro das Galáxias', author: 'Douglas Adams', coverImage: 'assets/images/mochileiro.jpg' },
+    { id: 3, title: 'Duna', author: 'Frank Herbert', coverImage: 'assets/images/duna.jpg' }
   ];
 
   constructor() { }
