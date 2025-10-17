@@ -1,13 +1,18 @@
-<h2>Nossos Livros</h2>
+<div class="books-container">
+  <h1 class="page-title">Explore Nosso Acervo</h1>
+  <p class="page-subtitle">Navegue pelos títulos disponíveis em nossa coleção.</p>
 
-<div class="book-grid" *ngIf="bookList.length > 0; else noBooks">
-  <div class="book-card" *ngFor="let book of bookList">
-    <img [src]="book.coverImage" [alt]="'Capa do livro ' + book.title">
-    <h3>{{ book.title }}</h3>
-    <p>por {{ book.author }}</p>
+  <div class="books-grid" *ngIf="bookList.length > 0; else noBooks">
+    <div class="book-card" *ngFor="let book of bookList">
+      <img class="book-cover" [src]="book.coverImage" [alt]="'Capa do livro ' + book.title">
+      <div class="book-info">
+        <h3 class="book-title">{{ book.title }}</h3>
+        <p class="book-author">{{ book.author }}</p>
+      </div>
+    </div>
   </div>
-</div>
 
-<ng-template #noBooks>
-  <p>Nenhum livro encontrado no momento.</p>
-</ng-template>
+  <ng-template #noBooks>
+    <p>Nenhum livro encontrado no momento.</p>
+  </ng-template>
+</div>
