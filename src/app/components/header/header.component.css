@@ -1,6 +1,7 @@
 .dropdown-menu {
   position: relative;
   display: inline-block;
+  top: 10px;
 }
 
 .dropdown-button {

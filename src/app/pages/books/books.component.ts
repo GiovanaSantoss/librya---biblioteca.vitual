@@ -27,4 +27,12 @@ export class BooksComponent implements OnInit {
     this.readingList = allBooks.filter(book => book.status === 'lendo');
     this.toBeReadList = allBooks.filter(book => book.status === 'toBeRead');   
   }
+
+  addBook(): void {
+    console.log('Botão de adicionar livro clicado!');
+    alert('Funcionalidade de adicionar livro a ser implementada!');
+  }
 }
+
+
+

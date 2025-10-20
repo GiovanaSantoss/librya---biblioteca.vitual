@@ -2,6 +2,8 @@
   <h1 class="page-title">LIBRYA.</h1>
   <p class="page-subtitle">Navegue pelos títulos disponíveis.</p>
 
+  <button class="add-book-btn" (click)="addBook()"> + Adicionar Livro</button>
+
   <div class="books-classes">
     <h2>TO BE READ</h2>
     <div class="books-grid" *ngIf="toBeReadList.length > 0; else noBooks">
