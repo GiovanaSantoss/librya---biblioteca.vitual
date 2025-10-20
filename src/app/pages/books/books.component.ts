@@ -12,11 +12,17 @@ import { BookService } from '../../services/book.service';
 })
 export class BooksComponent implements OnInit {
 
-  bookList: Book[] = [];
+  readList: Book[] = [];
+  readingList: Book[] = [];
+  toBeReadList: Book[] = [];
 
   constructor(private bookService: BookService) {}
 
   ngOnInit(): void {
-    this.bookList = this.bookService.getBooks();
+    const allBooks = this.bookService.getBooks();
+
+    this.readList = allBooks.filter(book => book.status === 'lido');
+    this.readingList = allBooks.filter(book => book.status === 'lendo');
+    this.toBeReadList = allBooks.filter(book => book.status === 'toBeRead');   
   }
 }
