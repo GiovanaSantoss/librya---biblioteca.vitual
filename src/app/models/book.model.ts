@@ -5,4 +5,5 @@ export interface Book {
   author: string;
   coverImage: string; 
   status: 'lido' | 'lendo' | 'toBeRead';
+  sinopse: string;
   }

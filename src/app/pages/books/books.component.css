@@ -26,16 +26,52 @@
 .book-card {
   background-color: white;
   border-radius: 8px;
-  overflow: hidden;
+  /* overflow: hidden; */
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
 }
 
 .book-card:hover {
   transform: scale(1.1);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   z-index: 10;
-  position: relative;
+}
+
+.book-sinopse {
+  position: absolute;
+  bottom: 70px;
+  left: 105%;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(15px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+  width: 200px;
+}
+
+.book-sinopse h4 {
+  margin-top: 0;
+  color: #333;
+}
+
+.book-sinopse p {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #555;
+}
+
+.book-card:hover .book-sinopse {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  transition-delay: 0s;
 }
 
 .book-cover {
@@ -75,7 +111,7 @@
 }
 
 .books-classes {
-  font-size: 1.0rem;
+  font-size: 1rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
   text-align: left;
