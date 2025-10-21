@@ -17,6 +17,7 @@ export class BooksComponent implements OnInit {
   toBeReadList: Book[] = [];
 
   allBooks: Book[] = [];
+  isModalOpen = false;
 
   constructor(private bookService: BookService) {}
 
@@ -29,8 +30,12 @@ export class BooksComponent implements OnInit {
   }
 
   addBook(): void {
-    console.log('Botão de adicionar livro clicado!');
-    alert('Funcionalidade de adicionar livro a ser implementada!');
+    this.isModalOpen = true;
+    console.log('Adicionar livro');
+  }
+
+  closeModal(): void {
+    this.isModalOpen = false;
   }
 }
 
