@@ -1,0 +1,45 @@
+<div class="container">
+  <h2>LIBRYA.</h2>
+
+  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="nome">Usuário</label>
+      <input type="text" id="nome" formControlName="nome" placeholder="Crie um nome de usuário">
+      
+      <div *ngIf="registroForm.get('nome')?.invalid && registroForm.get('nome')?.touched" class="error-message">
+        A criação de usuário é obrigatória.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" formControlName="email" placeholder="seu.email@exemplo.com">
+
+      <div *ngIf="registroForm.get('email')?.errors?.['required'] && registroForm.get('email')?.touched" class="error-message">
+        O email é obrigatório.
+      </div>
+      <div *ngIf="registroForm.get('email')?.errors?.['email'] && registroForm.get('email')?.touched" class="error-message">
+        Formato de email inválido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" formControlName="senha" placeholder="Mínimo de 5 caracteres">
+      
+      <div *ngIf="registroForm.get('senha')?.errors?.['required'] && registroForm.get('senha')?.touched" class="error-message">
+        A senha é obrigatória.
+      </div>
+       <div *ngIf="registroForm.get('senha')?.errors?.['minlength'] && registroForm.get('senha')?.touched" class="error-message">
+        A senha deve ter no mínimo 5 caracteres.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="registroForm.invalid">Registrar</button>
+  </form>
+
+  <p class="link-login">
+    Já tem uma conta? <a routerLink="/login">Faça o login</a>
+  </p>
+</div>
