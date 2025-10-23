@@ -45,4 +45,12 @@ export class BookService {
   getBooks(): Book[] {
     return this.books;
   }
+
+  deleteBook(id: number): void {
+    const bookIndex = this.books.findIndex(book => book.id === id);
+    if (bookIndex !== -1) {
+      this.books.splice(bookIndex, 1);
+    }
+  }
+
 }
