@@ -4,11 +4,11 @@
   <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
 
     <div class="form-group">
-      <label for="nome">Nome Completo</label>
-      <input type="text" id="nome" formControlName="nome" placeholder="Digite seu nome">
+      <label for="nome">Usuário</label>
+      <input type="text" id="nome" formControlName="nome" placeholder="Crie um nome de usuário">
       
       <div *ngIf="registroForm.get('nome')?.invalid && registroForm.get('nome')?.touched" class="error-message">
-        O nome é obrigatório.
+        A criação de usuário é obrigatória.
       </div>
     </div>
 
