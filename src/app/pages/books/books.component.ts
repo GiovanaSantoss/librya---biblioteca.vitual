@@ -31,11 +31,13 @@ export class BooksComponent implements OnInit {
 
   addBook(): void {
     this.isModalOpen = true;
+    document.body.style.overflow = 'hidden';
     console.log('Adicionar livro');
   }
 
   closeModal(): void {
     this.isModalOpen = false;
+    document.body.style.overflow = 'auto'; 
   }
 }
 
