@@ -1,0 +1,33 @@
+{
+  "books": [
+    {
+      "id": "d44f",
+      "title": "Duna",
+      "author": "Frank Herbert",
+      "coverImage": "https://m.media-amazon.com/images/I/81zN7udGRUL.jpg",
+      "status": "lendo",
+      "rating": 4,
+      "favorite": true
+    },
+    {
+      "id": "614e",
+      "title": "Uma Vida Pequena",
+      "author": "Hanya Yanagihara",
+      "coverImage": "https://img.bertrand.pt/images/uma-pequena-vida-hanya-yanagihara/NDV8Mjc4MzE3OTJ8MjQyMDkzNzJ8MTY2NjcxMzc3MTAwMA==/500x",
+      "sinopse": "\"Uma vida pequena\" é um romance que explora a amizade, a dor e a resiliência humana. A história segue quatro amigos que se mudam para Nova York em busca de uma vida melhor, enfrentando dificuldades e se sustentando apenas por sua amizade e ambições. O livro se concentra em Jude, um advogado talentoso que carrega traumas de sua infância, e como suas cicatrizes influenciam suas relações e desenvolvimento pessoal. A narrativa é intensa e emocionante, desafiando o leitor a confrontar as profundezas da dor e a beleza da sobrevivência",
+      "status": "lido",
+      "favorite": false,
+      "rating": 3
+    },
+    {
+      "title": "O Príncipe Cruel",
+      "author": "Holly Black",
+      "coverImage": "https://img.bertrand.pt/images/o-principe-cruel-holly-black/NDV8MjM4OTQ4NDF8MTk5MTc4NzN8MTU4MjUwMjQwMDAwMA==/500x",
+      "sinopse": "História de Jude, garota humana que vive no reino das fadas.",
+      "status": "lido",
+      "rating": 5,
+      "favorite": true,
+      "id": "e9f0"
+    }
+  ]
+}

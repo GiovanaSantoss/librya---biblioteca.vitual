@@ -4,87 +4,101 @@
 
   <button class="add-book-btn" (click)="addBook()">+ Adicionar Livro</button>
 
-  <div class="books-classes">
-    <h2>TO BE READ</h2>
-    <div class="books-grid" *ngIf="toBeReadList.length > 0; else noBooks">
-      <div class="book-card" *ngFor="let book of toBeReadList">
-        <img class="book-cover" [src]="book.coverImage" [alt]="'Capa do livro ' + book.title" />
-        <div class="book-info">
-          <h3 class="book-title">{{ book.title }}</h3>
-          <p class="book-author">{{ book.author }}</p>
-        </div>
-        <div class="book-sinopse">
-          <h4>Sinopse</h4>
-          <p>{{ book.sinopse }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="books-classes">
-    <h2>LENDO</h2>
-    <div class="books-grid" *ngIf="readingList.length > 0; else noBooks">
-      <div class="book-card" *ngFor="let book of readingList">
-        <img class="book-cover" [src]="book.coverImage" [alt]="'Capa do livro ' + book.title" />
-        <div class="book-info">
-          <h3 class="book-title">{{ book.title }}</h3>
-          <p class="book-author">{{ book.author }}</p>
-        </div>
-        <div class="book-sinopse">
-          <h4>Sinopse</h4>
-          <p>{{ book.sinopse }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="books-classes">
-    <h2>LIDOS</h2>
-    <div class="books-grid" *ngIf="readList.length > 0; else noBooks">
-      <div class="book-card" *ngFor="let book of readList">
-        <img class="book-cover" [src]="book.coverImage" [alt]="'Capa do livro ' + book.title" />
-        <div class="book-info">
-          <h3 class="book-title">{{ book.title }}</h3>
-          <p class="book-author">{{ book.author }}</p>
-        </div>
-        <div class="book-sinopse">
-          <h4>Sinopse</h4>
-          <p>{{ book.sinopse }}</p>
+  <ng-container *ngFor="let section of [
+    { title: 'TO BE READ', list: toBeReadList },
+    { title: 'LENDO', list: readingList },
+    { title: 'LIDOS', list: readList }
+  ]">
+    <div class="books-classes">
+      <h2>{{ section.title }}</h2>
+      <div class="books-grid" *ngIf="section.list.length > 0; else noBooks">
+        <div class="book-card" *ngFor="let book of section.list">
+          <img class="book-cover" [src]="book.coverImage" [alt]="'Capa do livro ' + book.title" />
+          <div class="book-info">
+            <h3 class="book-title">{{ book.title }}</h3>
+            <p class="book-author">{{ book.author }}</p>
+          </div>
+          <div class="book-sinopse">
+            <h4>Sinopse</h4>
+            <p>{{ book.sinopse }}</p>
+          </div>
+          <div class="book-rating">
+            <span *ngFor="let star of [1,2,3,4,5]" 
+                  (click)="setRating(book, star)" 
+                  [class.filled]="book.rating >= star">★</span>
+            <span class="favorite" [class.active]="book.favorite" 
+                  (click)="toggleFavorite(book)">♥</span>
+          </div>
+          <div class="book-actions">
+            <button class="edit-btn" (click)="editBook(book)">✏️ Editar</button>
+            <button class="delete-btn" (click)="deleteBook(book.id)">🗑️ Excluir</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 
   <ng-template #noBooks>
     <p>Nenhum livro encontrado no momento.</p>
   </ng-template>
 
+  <!-- MODAL -->
   <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
     <div class="modal-content" (click)="$event.stopPropagation()">
       <div class="modal-header">
-        <h2>Adicionar Novo Livro</h2>
+        <h2>{{ modalTitle }}</h2>
         <button class="close-btn" (click)="closeModal()">&times;</button>
       </div>
 
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="title">Título</label>
-          <input type="text" id="title" placeholder="Ex: O Hobbit" />
-        </div>
-        <div class="form-group">
-          <label for="author">Autor(a)</label>
-          <input type="text" id="author" placeholder="Ex: J.R.R. Tolkien" />
-        </div>
-        <div class="form-group">
-          <label for="cover">URL da Capa</label>
-          <input type="text" id="cover" placeholder="https://exemplo.com/capa.jpg" />
-        </div>
-      </div>
+      <form [formGroup]="bookForm" (ngSubmit)="saveBook()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="title">Título</label>
+            <input id="title" type="text" formControlName="title" placeholder="Ex: O Hobbit" />
+          </div>
 
-      <div class="modal-footer">
-        <button class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
-        <button class="btn btn-primary">Salvar Livro</button>
-      </div>
+          <div class="form-group">
+            <label for="author">Autor(a)</label>
+            <input id="author" type="text" formControlName="author" placeholder="Ex: J.R.R. Tolkien" />
+          </div>
+
+          <div class="form-group">
+            <label for="cover">URL da Capa</label>
+            <input id="cover" type="text" formControlName="coverImage" placeholder="https://exemplo.com/capa.jpg" />
+          </div>
+
+          <div class="form-group">
+            <label for="sinopse">Sinopse</label>
+            <textarea id="sinopse" formControlName="sinopse" placeholder="Escreva uma breve sinopse"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" formControlName="status">
+              <option value="toBeRead">To Be Read</option>
+              <option value="lendo">Lendo</option>
+              <option value="lido">Lido</option>
+            </select>
+          </div>
+
+          <div class="form-group rating-control">
+            <label>Avaliação</label>
+            <div class="stars">
+              <span *ngFor="let star of [1,2,3,4,5]" 
+                    (click)="setFormRating(star)" 
+                    [class.filled]="bookForm.get('rating')?.value >= star">★</span>
+              <span class="favorite" 
+                    [class.active]="bookForm.get('favorite')?.value"
+                    (click)="toggleFormFavorite()">♥</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="bookForm.invalid">Salvar</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

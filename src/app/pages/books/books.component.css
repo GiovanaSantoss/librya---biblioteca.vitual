@@ -262,3 +262,140 @@
 .btn-secondary:hover {
   background-color: #ccc;
 }
+
+.delete-btn {
+  background-color: none;
+  color: #e74c3c;
+  border: 2px solid #e74c3c;
+  padding: 6px 12px ;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #e74c3c;
+  color: white;
+  transform: scale(1.05);
+}
+
+.edit-btn {
+  background: none;
+  color: #6c63ff;
+  border: 2px solid #6c63ff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.edit-btn:hover {
+  background-color: #6c63ff;
+  color: white;
+  transform: scale(1.05);
+}
+
+@keyframes modalPop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-content {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  animation: modalPop 0.35s ease forwards;
+}
+
+body.modal-open {
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+}
+
+.rating-control .stars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0.5rem;
+  font-size: 1.6rem;
+}
+
+.rating-control .stars span {
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.rating-control .stars span.filled {
+  color: #ffcc00;
+}
+
+.rating-control .stars span.favorite {
+  font-size: 1.8rem;
+  margin-left: 10px;
+  color: #bbb;
+}
+
+.rating-control .stars span.favorite.active {
+  color: #ff4d6d;
+  transform: scale(1.1);
+}
+
+.rating-control .stars span:hover {
+  transform: scale(1.2);
+}
+
+.book-rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+.book-rating span {
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.book-rating span.filled {
+  color: #ffcc00; /* estrela dourada */
+}
+
+.book-rating span.favorite {
+  font-size: 1.7rem;
+  color: #bbb;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.book-rating span.favorite.active {
+  color: #ff4d6d; /* rosa/coração */
+  transform: scale(1.1);
+}
+
+.book-rating span:hover {
+  transform: scale(1.2);
+}
+
+.book-actions {
+  display: flex;
+  justify-content: center; /* ou flex-start se quiser alinhados à esquerda */
+  gap: 10px; /* espaçamento entre os botões */
+  margin-top: 10px; /* um pouco de distância do conteúdo acima */
+}
+
