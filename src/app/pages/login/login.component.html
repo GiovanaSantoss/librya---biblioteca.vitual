@@ -2,7 +2,7 @@
   <div class="login-form">
     <h1 class="form-title">LIBRYA.</h1>
 
-    <form>
+    <form (ngSubmit)="onLogin()">
       <div class="form-group">
         <label for="email" class="form-label">Usuário</label>
         <input type="email" id="email" class="form-input" placeholder="seu.usuario" />
