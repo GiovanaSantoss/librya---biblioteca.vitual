@@ -7,6 +7,11 @@ import { Book } from '../models/book.model';
   providedIn: 'root'
 })
 export class BookService {
+  API_URL: any;
+  getBooksByUserId(userId: number): Observable<Book[]> {
+    return this.http.get<Book[]>(`${this.apiUrl}?userId=${userId}`);
+  }
+
   private apiUrl = 'http://localhost:3000/books';
 
   constructor(private http: HttpClient) {}
@@ -19,11 +24,11 @@ export class BookService {
     return this.http.post<Book>(this.apiUrl, book);
   }
 
-  updateBook(id: number, book: Book): Observable<Book> {
+  updateBook(id: string, book: Book): Observable<Book> {
     return this.http.put<Book>(`${this.apiUrl}/${id}`, book);
   }
 
-  deleteBook(id: number): Observable<void> {
+  deleteBook(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

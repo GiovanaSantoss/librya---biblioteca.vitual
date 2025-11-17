@@ -3,6 +3,9 @@
   <p class="page-subtitle">Navegue pelos títulos disponíveis.</p>
 
   <button class="add-book-btn" (click)="addBook()">+ Adicionar Livro</button>
+  <h2 class="welcome">
+    Bem-vindo(a), <strong>{{ userName }}</strong>!
+  </h2>
 
   <ng-container *ngFor="let section of [
     { title: 'TO BE READ', list: toBeReadList },
@@ -40,10 +43,11 @@
 
   <ng-template #noBooks>
     <p>Nenhum livro encontrado no momento.</p>
-  </ng-template>
+  </ng-template>  
+</div>
 
-  <!-- MODAL -->
-  <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
+<!-- MODAL -->
+<div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()">
     <div class="modal-content" (click)="$event.stopPropagation()">
       <div class="modal-header">
         <h2>{{ modalTitle }}</h2>
@@ -101,4 +105,3 @@
       </form>
     </div>
   </div>
-</div>

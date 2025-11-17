@@ -1,21 +1,27 @@
-// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private readonly USER_KEY = 'user';
+  private readonly API_URL = 'http://localhost:3000/users';
 
-  constructor(private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  login(email: string, senha: string): boolean {
-    // Aqui você verifica login (chamando API, validando credenciais, etc).
-    // Para exemplo simples, vamos simular login bem-sucedido:
-    const fakeUser = { email };
-    localStorage.setItem(this.USER_KEY, JSON.stringify(fakeUser));
-    return true;
+  registrar(userData: any): Observable<any> {
+    return this.http.post(this.API_URL, userData);
+  }
+
+  login(email: string, senha: string): Observable<any[]> {
+    const url = `${this.API_URL}?email=${email}&password=${senha}`;
+    return this.http.get<any[]>(url);
+    // const fakeUser = { email };
+    // localStorage.setItem(this.USER_KEY, JSON.stringify(fakeUser));
+    // return true;
   }
 
   logout(): void {
@@ -32,3 +38,4 @@ export class AuthService {
     return u ? JSON.parse(u) : null;
   }
 }
+

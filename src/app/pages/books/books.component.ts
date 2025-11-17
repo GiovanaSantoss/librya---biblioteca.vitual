@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Book } from '../../models/book.model';
@@ -20,10 +21,13 @@ export class BooksComponent implements OnInit {
   allBooks: Book[] = [];
   isModalOpen = false;
   bookForm!: FormGroup;
+  userName: string = '';
 
-  editingBookId: number | null = null;
+  editingBookId: string | null = null;
   modalTitle = 'Adicionar Novo Livro';
   private scrollPosition = 0; // guarda posição de rolagem
+  router: any;
+  books: any;
 
   constructor(private bookService: BookService, private fb: FormBuilder) {}
 
@@ -39,10 +43,36 @@ export class BooksComponent implements OnInit {
       rating: [0],
       favorite: [false]
     });
+
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (user && user.nome) {
+      this.userName = user.nome;
+    } else {
+      this.userName = user.email?.split('@')[0] || 'usuário';
+    }
+    
+    if (!user || !user.id) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    this.loadBooks();
+    // fetch(`http://localhost:3000/books?userId=${user.id}`)
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     this.books = data;
+    //   });
   }
 
   loadBooks(): void {
-    this.bookService.getBooks().subscribe((books) => {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+    // if (!user || !user.id) {
+    //   this.router.navigate(['/login']);
+    //   return;
+    // }
+
+    this.bookService.getBooksByUserId(user.id).subscribe((books) => {
       this.allBooks = books;
       this.readList = books.filter(b => b.status === 'lido');
       this.readingList = books.filter(b => b.status === 'lendo');
@@ -102,7 +132,12 @@ export class BooksComponent implements OnInit {
       return;
     }
 
-    const bookData = this.bookForm.value;
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+    const bookData = {
+      ...this.bookForm.value,
+      userId: user.id
+    };
 
     if (this.editingBookId) {
       this.bookService.updateBook(this.editingBookId, bookData).subscribe(() => {
@@ -117,7 +152,7 @@ export class BooksComponent implements OnInit {
     }
   }
 
-  deleteBook(id: number): void {
+  deleteBook(id: string): void {
     if (confirm('Tem certeza que deseja excluir este livro?')) {
       this.bookService.deleteBook(id).subscribe(() => this.loadBooks());
     }
@@ -130,7 +165,9 @@ export class BooksComponent implements OnInit {
 
   toggleFavorite(book: Book): void {
     book.favorite = !book.favorite;
-    this.bookService.updateBook(book.id, book).subscribe(() => this.loadBooks());
+    this.bookService.updateBook(book.id, book).subscribe(() => {
+      this.loadBooks();
+    });
   }
 
   // --- Dentro do modal
@@ -141,5 +178,5 @@ export class BooksComponent implements OnInit {
   toggleFormFavorite(): void {
     const current = this.bookForm.get('favorite')?.value;
     this.bookForm.patchValue({ favorite: !current });
-  }
+  }  
 }

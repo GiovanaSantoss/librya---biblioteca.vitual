@@ -1,3 +1,4 @@
+/* CONTAINER GERAL */
 .books-container {
   padding: 2rem 4rem;
   text-align: center;
@@ -24,10 +25,10 @@
   gap: 2rem;
 }
 
+/* BOOK CARD */
 .book-card {
   background-color: white;
   border-radius: 8px;
-  /* overflow: hidden; */
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
@@ -37,42 +38,6 @@
   transform: scale(1.1);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   z-index: 10;
-}
-
-.book-sinopse {
-  position: absolute;
-  bottom: 70px;
-  left: 105%;
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 20px;
-  background: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
-  box-shadow: 0 20px 55px rgba(0, 0, 0, 0, 0.2);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateX(15px);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
-  width: 200px;
-}
-
-.book-sinopse h4 {
-  margin-top: 0;
-  color: #333;
-}
-
-.book-sinopse p {
-  font-size: 0.9rem;
-  line-height: 1.4;
-  color: #555;
-}
-
-.book-card:hover .book-sinopse {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(0);
-  transition-delay: 0s;
 }
 
 .book-cover {
@@ -100,17 +65,43 @@
   color: #777;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* SINOPSE */
+.book-sinopse {
+  position: absolute;
+  bottom: 70px;
+  left: 105%;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  color: #555;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(15px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+  width: 200px;
 }
 
+.book-card:hover .book-sinopse {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  transition-delay: 0s;
+}
+
+.book-sinopse h4 {
+  margin-top: 0;
+  color: #333;
+}
+
+/* FADE IN DA PÁGINA */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* CLASSIFICAÇÃO DAS SEÇÕES */
 .books-classes {
   font-size: 1rem;
   font-weight: 600;
@@ -118,6 +109,7 @@
   text-align: left;
 }
 
+/* BOTÃO DE ADICIONAR LIVRO */
 .add-book-btn {
   position: absolute;
   top: 2rem;
@@ -139,45 +131,44 @@
   transform: translateY(-2px);
 }
 
+/* ============================= */
+/* MODAL — CONFIGURAÇÃO CORRETA */
+/* ============================= */
+
 .modal-overlay {
   position: fixed;
-  inset: 0; 
+  inset: 0;
   background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  overflow: hidden; 
-  height: 100vh; 
 }
-
 
 .modal-content {
   background: #ffffff;
   padding: 2rem;
   border-radius: 12px;
-  width: 400px;
+  width: 420px;
   max-width: 90%;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  animation: fadeIn 0.3s ease-in-out;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  animation: modalPop 0.35s ease forwards;
+  position: relative;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+/* ANIMAÇÃO POP-UP */
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
 
+/* CABEÇALHO DO MODAL */
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
 }
 
 .modal-header h2 {
@@ -189,16 +180,17 @@
 .close-btn {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   cursor: pointer;
   color: #777;
-  transition: 0.2s ease;
+  transition: 0.2s;
 }
 
 .close-btn:hover {
   color: #000;
 }
 
+/* CORPO DO MODAL */
 .modal-body {
   display: flex;
   flex-direction: column;
@@ -216,7 +208,9 @@
   margin-bottom: 0.3rem;
 }
 
-.form-group input {
+.form-group input,
+.form-group textarea,
+.form-group select {
   padding: 0.7rem;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -224,11 +218,14 @@
   transition: border-color 0.3s;
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
   border-color: #6c63ff;
   outline: none;
 }
 
+/* RODAPÉ DO MODAL */
 .modal-footer {
   display: flex;
   justify-content: flex-end;
@@ -242,7 +239,7 @@
   border-radius: 6px;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .btn-primary {
@@ -263,6 +260,7 @@
   background-color: #ccc;
 }
 
+/* BOTÕES DE AÇÃO DOS LIVROS */
 .delete-btn {
   background-color: none;
   color: #e74c3c;
@@ -297,94 +295,34 @@
   transform: scale(1.05);
 }
 
-@keyframes modalPop {
-  from {
-    opacity: 0;
-    transform: translateY(-20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.modal-content {
-  background: #ffffff;
-  padding: 2rem;
-  border-radius: 12px;
-  width: 400px;
-  max-width: 90%;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  animation: modalPop 0.35s ease forwards;
-}
-
-body.modal-open {
-  position: fixed;
-  width: 100%;
-  overflow: hidden;
-}
-
-.rating-control .stars {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-top: 0.5rem;
-  font-size: 1.6rem;
-}
-
-.rating-control .stars span {
-  cursor: pointer;
-  color: #ccc;
-  transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.rating-control .stars span.filled {
-  color: #ffcc00;
-}
-
-.rating-control .stars span.favorite {
-  font-size: 1.8rem;
-  margin-left: 10px;
-  color: #bbb;
-}
-
-.rating-control .stars span.favorite.active {
-  color: #ff4d6d;
-  transform: scale(1.1);
-}
-
-.rating-control .stars span:hover {
-  transform: scale(1.2);
-}
-
+/* AVALIAÇÃO — ESTRELAS E FAVORITO */
+.rating-control .stars,
 .book-rating {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
   font-size: 1.5rem;
-  margin-top: 10px;
 }
 
+.rating-control .stars span,
 .book-rating span {
   cursor: pointer;
   color: #ccc;
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.book-rating span.filled {
-  color: #ffcc00; /* estrela dourada */
+.filled {
+  color: #ffcc00 !important;
 }
 
-.book-rating span.favorite {
-  font-size: 1.7rem;
+.favorite {
+  font-size: 1.8rem;
   color: #bbb;
-  transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.book-rating span.favorite.active {
-  color: #ff4d6d; /* rosa/coração */
+.favorite.active {
+  color: #ff4d6d;
   transform: scale(1.1);
 }
 
@@ -392,10 +330,25 @@ body.modal-open {
   transform: scale(1.2);
 }
 
+/* AÇÕES */
 .book-actions {
   display: flex;
-  justify-content: center; /* ou flex-start se quiser alinhados à esquerda */
-  gap: 10px; /* espaçamento entre os botões */
-  margin-top: 10px; /* um pouco de distância do conteúdo acima */
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
 }
 
+/* SAUDAÇÃO */
+.welcome {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* BLOQUEIA SCROLL QUANDO O MODAL ABRE */
+body.modal-open {
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+}

@@ -1,6 +1,6 @@
 
 export interface Book {
-  id: number;
+  id: string;
   title: string;
   author: string;
   coverImage: string;
